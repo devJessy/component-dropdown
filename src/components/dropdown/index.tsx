@@ -14,7 +14,9 @@ interface DropdownProps {
 }
 export const Dropdown: React.FC<DropdownProps> = ({ text, icon, contentAlign = "right", children, props }) => {
   const [isOpened, setIsOpened] = useState(false);
+  const [valueText, setValueText] = useState(text || "???");
   const dropBox = useRef<any>();
+
   const dropPannel = useRef<any>();
   useEffect(() => {
     const handle = (event: any) => {
@@ -48,14 +50,14 @@ export const Dropdown: React.FC<DropdownProps> = ({ text, icon, contentAlign = "
         }}
       >
         {icon}
-        {text || "???"}
-        {/* <NarrowIcon dir={isOpened ? "up" : "down"} /> */}
+        {valueText}
         <NarrowIcon />
       </Box>
       {/* <Box visibility={isOpened ? "visible" : "hidden"} style={{opacity : isOpened ? "1" : "0", background : "darkgray"}} position={"absolute"} top={"110%"} right={contentAlign === "right" ? "0px" : "auto"} left={contentAlign === "left" ? "0px" : "auto"} px={"22px"} py={"12px"} border={"1px solid #333333"} borderRadius={"8px"} ref={dropPannel} display={"flex"} flexDirection={"column"} transition={"var(--transition)"} zIndex={3}> */}
       <div style={{visibility : isOpened ? "visible" : "hidden",opacity : isOpened ? "1" : "0", background : "#323634" , position : 'absolute', top : 'calc(100% - 10px)', right : contentAlign === "right" ? "0px" : "auto", left : contentAlign === "left" ? "0px" : "auto", padding : '12px 12px', display : 'flex' , flexDirection : "column", zIndex : 3, transition : "0.5s", color : "white", width : "100%", borderRadius : '8px'}}>
-        {typeof children === "object" && <DropdownItem
+        {/* {typeof children === "object"  && <DropdownItem
                   onClick={() => {
+                    
                     setIsOpened(false);
                   }}
                   style={{
@@ -64,13 +66,16 @@ export const Dropdown: React.FC<DropdownProps> = ({ text, icon, contentAlign = "
                   whiteSpace={"nowrap"}
                 >
                   {children}
-                </DropdownItem>}
-        {typeof children !== "object" && (Array.isArray(children)
-          ? children?.map((each, index) => {
+                </DropdownItem>} */}
+        {(Array.isArray(children)
+          ? children?.map((each : any, index) => {
               return (
                 <DropdownItem
                   key={index}
                   onClick={() => {
+                    if(each?.props.text){
+                      setValueText(each?.props.text)
+                    }
                     setIsOpened(false);
                   }}
                   style={{
@@ -97,11 +102,11 @@ const DropdownItem = styled(Box)`
 `;
 
 interface DropdownItemsProps {
-  text?: any;
+  text?: string;
 }
 
-export const DropdownItems : React.FC<DropdownItemsProps> = ({children}) => {
+export const DropdownItems : React.FC<DropdownItemsProps> = ({text, children}) => {
   return (
-    <div style={{marginTop : '10px', padding: '5px', width : '100%', textAlign : 'center'}}>{children}</div>
+    <div style={{marginTop : '10px', padding: '5px', width : '100%', textAlign : 'center'}}>{text}</div>
   )
 }
