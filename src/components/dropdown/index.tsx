@@ -1,10 +1,7 @@
 import { useEffect, useRef, useState } from "react";
-// import { Box, Input } from "components/base/initial";
-import { Box } from "@material-ui/core";
-// import {  NarrowIcon } from "components/icons";
 import NarrowIcon from "components/icons/NarrowIcon";
 import styled from "styled-components";
-import { stringify } from "querystring";
+import './dropdown.scss'
 
 interface DropdownProps {
   text?: any;
@@ -30,43 +27,17 @@ export const Dropdown: React.FC<DropdownProps> = ({ text, icon, contentAlign = "
     };
   }, []);
   return (
-    <div style={{position : "relative", display : "inline-block"}}   ref={dropBox} {...props}>
-      <Box
-        
-        height={"40px"}
-        px={"10px"}
-        fontWeight={["500"]}
-        fontSize={["14px"]}
-        lineHeight={["16px"]}
-        style={{cursor : "pointer", background : "#323634", borderRadius : '8px'}}
-        display={"flex"}
-        alignItems={"center"}
-        gridGap={"12px"}
-        flexWrap={"nowrap"}
-        whiteSpace={"nowrap"}
-        color={"white"}
-        onClick={() => {
+    <div className="drop-down" ref={dropBox} {...props}>
+      <div className="drop-down-container"
+          onClick={() => {
           setIsOpened(!isOpened);
         }}
       >
         {icon}
         {valueText}
         <NarrowIcon />
-      </Box>
-      {/* <Box visibility={isOpened ? "visible" : "hidden"} style={{opacity : isOpened ? "1" : "0", background : "darkgray"}} position={"absolute"} top={"110%"} right={contentAlign === "right" ? "0px" : "auto"} left={contentAlign === "left" ? "0px" : "auto"} px={"22px"} py={"12px"} border={"1px solid #333333"} borderRadius={"8px"} ref={dropPannel} display={"flex"} flexDirection={"column"} transition={"var(--transition)"} zIndex={3}> */}
-      <div style={{visibility : isOpened ? "visible" : "hidden",opacity : isOpened ? "1" : "0", background : "#323634" , position : 'absolute', top : 'calc(100% - 10px)', right : contentAlign === "right" ? "0px" : "auto", left : contentAlign === "left" ? "0px" : "auto", padding : '12px 12px', display : 'flex' , flexDirection : "column", zIndex : 3, transition : "0.5s", color : "white", width : "100%", borderRadius : '8px'}}>
-        {/* {typeof children === "object"  && <DropdownItem
-                  onClick={() => {
-                    
-                    setIsOpened(false);
-                  }}
-                  style={{
-                      cursor : "pointer"
-                  }}
-                  whiteSpace={"nowrap"}
-                >
-                  {children}
-                </DropdownItem>} */}
+      </div>
+      <div className="drop-down-sub" style={{visibility : isOpened ? "visible" : "hidden",opacity : isOpened ? "1" : "0",  right : contentAlign === "right" ? "0px" : "auto", left : contentAlign === "left" ? "0px" : "auto"}}>
         {(Array.isArray(children)
           ? children?.map((each : any, index) => {
               return (
@@ -78,10 +49,6 @@ export const Dropdown: React.FC<DropdownProps> = ({ text, icon, contentAlign = "
                     }
                     setIsOpened(false);
                   }}
-                  style={{
-                      cursor : "pointer"
-                  }}
-                  whiteSpace={"nowrap"}
                 >
                   {each}
                 </DropdownItem>
@@ -92,9 +59,11 @@ export const Dropdown: React.FC<DropdownProps> = ({ text, icon, contentAlign = "
     </div>
   );
 };
-const DropdownItem = styled(Box)`
+const DropdownItem = styled.div`
+  cursor : pointer;
+  whiteSpace: nowrap;
   & > * {
-    // padding: 5px;
+    padding: 5px;
   }
   & > *:hover {
     background: #8888;
@@ -107,6 +76,6 @@ interface DropdownItemsProps {
 
 export const DropdownItems : React.FC<DropdownItemsProps> = ({text, children}) => {
   return (
-    <div style={{marginTop : '10px', padding: '5px', width : '100%', textAlign : 'center'}}>{text}</div>
+    <div className="drop-down-items">{text}</div>
   )
 }

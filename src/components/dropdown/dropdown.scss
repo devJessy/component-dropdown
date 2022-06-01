@@ -1,0 +1,42 @@
+.drop-down {
+  position: relative;
+  display: inline-block;
+}
+
+.drop-down-container {
+  height: 40px;
+  padding: 10px;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 16px;
+  background: #323634;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  grid-gap: 12px;
+  flex-wrap: nowrap;
+  white-space: nowrap;
+  color: white;
+  cursor: pointer;
+}
+
+.drop-down-sub {
+  background: #323634;
+  position: absolute;
+  top: calc(100% - 10px);
+  padding: 12px 12px;
+  display: flex;
+  flex-direction: column;
+  z-index: 3;
+  transition: 0.5s;
+  color: white;
+  width: 100%;
+  border-radius: 8px;
+}
+
+.drop-down-items {
+  margin-top: 10px;
+  padding: 5px;
+  width: 100%;
+  text-align: center;
+}

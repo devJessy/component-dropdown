@@ -11,8 +11,7 @@ const App = () => {
       <Switch>
         <Layout>
           <Route exact path='/'>
-            <Landing />
-            <div style={{width : '250px', marginLeft : "200px"}}>
+            <div style={{width : '250px', marginLeft : "200px", marginTop : '100px'}}>
               <Dropdown text={`Active Delegates`}>
                 <DropdownItems text={`Past Delegates 1`}>Past Delegates 1</DropdownItems>
                 <DropdownItems text={`Past Delegates 2`}>Past Delegates 2</DropdownItems>
