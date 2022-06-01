@@ -36,7 +36,7 @@ export const Dropdown: React.FC<DropdownProps> = ({ text, icon, contentAlign = "
         fontWeight={["500"]}
         fontSize={["14px"]}
         lineHeight={["16px"]}
-        style={{cursor : "pointer", background : "#323634", borderRadius : '8px 8px 0px 0px'}}
+        style={{cursor : "pointer", background : "#323634", borderRadius : '8px'}}
         display={"flex"}
         alignItems={"center"}
         gridGap={"12px"}
@@ -95,3 +95,13 @@ const DropdownItem = styled(Box)`
     background: #8888;
   }
 `;
+
+interface DropdownItemsProps {
+  text?: any;
+}
+
+export const DropdownItems : React.FC<DropdownItemsProps> = ({children}) => {
+  return (
+    <div style={{marginTop : '10px', padding: '5px', width : '100%', textAlign : 'center'}}>{children}</div>
+  )
+}
